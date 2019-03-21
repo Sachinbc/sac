@@ -1,9 +1,19 @@
+sudo: false
+
+# Set the build language to Python
 language: python
-python:
-- "3.6"
-cache: pip
-before_script:
-  -easy_install distribute
-  -pip install -r requirements.txt
-script:"
-  -python demo.py
+
+# Set the python version to 2.7
+python: 2.7
+
+# Install the codecov pip dependency
+install:
+  - pip install codecov
+
+# Run the unit test
+script:
+  - coverage run demo.py
+
+# Push the results back to codecov
+after_success:
+  - codecov
